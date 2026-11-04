@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Ninja: Square & Cube Roots Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0fdf4;
+        }
+        .heading-font {
+            font-family: 'Fredoka One', cursive;
+        }
+        .tab-active {
+            border-bottom: 4px solid #16a34a;
+            color: #16a34a;
+        }
+        .factor-bubble {
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-sm border-b-2 border-green-100 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-500 text-white p-2.5 rounded-2xl shadow-md rotate-[-3deg]">
+                    <i class="fa-solid fa-user-ninja text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl heading-font text-green-600 tracking-wide">Math Ninja!</h1>
+                    <p class="text-xs text-slate-500 font-semibold">Grade 7 Square & Cube Root Wizardry</p>
+                </div>
+            </div>
+            <nav class="flex gap-1 bg-slate-100 p-1 rounded-xl">
+                <button onclick="switchTab('learn')" id="tab-learn" class="px-4 py-2 rounded-lg font-bold text-sm transition-all tab-active"><i class="fa-solid fa-book-open mr-1"></i> Learn</button>
+                <button onclick="switchTab('practice')" id="tab-practice" class="px-4 py-2 rounded-lg font-bold text-sm text-slate-600 transition-all"><i class="fa-solid fa-dumbbell mr-1"></i> Practice</button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="px-4 py-2 rounded-lg font-bold text-sm text-slate-600 transition-all"><i class="fa-solid fa-stopwatch mr-1"></i> Quiz Arena</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-grow">
+        
+        <!-- ================= LEARN TAB ================= -->
+        <section id="content-learn" class="space-y-8">
+            <!-- Concept Selector -->
+            <div class="flex justify-center gap-4">
+                <button onclick="toggleLearnConcept('square')" id="btn-learn-square" class="px-6 py-3 rounded-2xl font-bold bg-green-500 text-white shadow-md transform hover:scale-105 transition-all">Square Roots (√)</button>
+                <button onclick="toggleLearnConcept('cube')" id="btn-learn-cube" class="px-6 py-3 rounded-2xl font-bold bg-white text-green-600 border-2 border-green-200 hover:bg-green-50 shadow-sm transform hover:scale-105 transition-all">Cube Roots (³√)</button>
+            </div>
+
+            <!-- Square Root Content Container -->
+            <div id="learn-square-zone" class="space-y-8">
+                <!-- Kid Intro Card -->
+                <div class="bg-gradient-to-r from-green-400 to-emerald-500 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-6">
+                    <div class="text-5xl">🌱</div>
+                    <div>
+                        <h3 class="text-2xl heading-font mb-2">What is a Square Root?</h3>
+                        <p class="text-lg leading-relaxed font-medium">Imagine you have an army of square blocks and you line them up to make one giant square shape. The **Square Root** is simply the length of **one side** of that perfect square! If you have 25 blocks total, they form a 5x5 grid, so the square root of 25 is 5!</p>
+                    </div>
+                </div>
+
+                <!-- Methods Grid -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Method A -->
+                    <div class="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-md flex flex-col justify-between">
+                        <div>
+                            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Method 1</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3">Prime Factorization Using Division</h4>
+                            <p class="text-slate-600 text-sm mb-4">This method breaks down a big number into its building blocks (prime numbers) by continuous division.</p>
+                            
+                            <div class="bg-green-50 p-4 rounded-xl border border-green-100 space-y-2 text-sm mb-4">
+                                <p class="font-bold text-green-800">Step-by-Step Guide for 1764:</p>
+                                <ul class="list-disc pl-4 text-slate-700 space-y-1">
+                                    <li>Divide by the smallest prime number (2, 3, 5, 7, …) that divides evenly into the number.</li>
+                                    <li>Keep dividing the new answers until you reach 1.</li>
+                                    <li>Group the prime factors into pairs of identical numbers.</li>
+                                    <li>Take one number from each pair and multiply them to get your final square root!</li>
+                                </ul>
+                                <p class="font-bold text-green-800 mt-3">Let's Solve It:</p>
+                                <div class="font-mono text-xs bg-white p-3 rounded border border-green-200 text-slate-700 space-y-1">
+                                    <p>1764 ÷ 2 = 882 (Even number, divide by 2)</p>
+                                    <p>882 ÷ 2 = 441 (Even number, divide by 2)</p>
+                                    <p>441 ÷ 3 = 147 (Sum of digits is 4+4+1=9, divisible by 3)</p>
+                                    <p>147 ÷ 3 = 49 (49 is 7 × 7)</p>
+                                    <p>49 ÷ 7 = 7</p>
+                                    <p>7 ÷ 7 = 1</p>
+                                </div>
+                                <p class="text-xs font-semibold text-slate-700 mt-2">Now, write out all the prime factors we used:</p>
+                                <p class="font-mono text-xs font-bold text-slate-800">1764 = 2 × 2 × 3 × 3 × 7 × 7</p>
+                                <p class="text-xs font-semibold text-slate-700 mt-1">Next, group them into pairs:</p>
+                                <ul class="list-disc pl-4 text-xs text-slate-700">
+                                    <li>Pair of twos: (2 × 2) → Take one 2</li>
+                                    <li>Pair of threes: (3 × 3) → Take one 3</li>
+                                    <li>Pair of sevens: (7 × 7) → Take one 7</li>
+                                </ul>
+                                <p class="text-xs font-semibold text-slate-700 mt-1">Multiply the single numbers from each pair:</p>
+                                <p class="font-bold text-sm text-green-700">"Square root" = 2 × 3 × 7 = 42</p>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm">
+                                <p class="font-bold text-slate-700">⚠️ Constraints & Weaknesses:</p>
+                                <ul class="list-disc pl-4 text-slate-600 space-y-1">
+                                    <li>Takes a long time for big numbers.</li>
+                                    <li>If the number splits into huge prime factors (like 79 × 79), it becomes very hard to guess the divisor without a calculator!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method B -->
+                    <div class="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-md flex flex-col justify-between">
+                        <div>
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Method 2</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3">Vedic Maths Mental Calculation Trick ⚡</h4>
+                            <p class="text-slate-600 text-sm mb-4">Vedic mathematics offers a lightning-fast trick to find the square root of a 4-digit perfect square in your head without doing long division!</p>
+                            
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 space-y-3 text-sm mb-4">
+                                <p class="font-bold text-purple-800">Step-by-Step Guide for 1764:</p>
+                                
+                                <div>
+                                    <p class="font-bold text-purple-700 text-xs uppercase">Step 1: Find the Units Digit</p>
+                                    <p class="text-xs text-slate-700">Look at the last digit of your number. For 1764, the last digit is 4. Ask yourself: Which single-digit numbers, when multiplied by themselves, end in 4?</p>
+                                    <div class="font-mono text-xs bg-white p-2 rounded border border-purple-200 mt-1">
+                                        <p>2 × 2 = 4</p>
+                                        <p>8 × 8 = 64 (ends in 4)</p>
+                                    </div>
+                                    <p class="text-xs text-slate-700 mt-1 font-semibold">So, our units digit is either 2 or 8.</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-bold text-purple-700 text-xs uppercase">Step 2: Find the Tens Digit</p>
+                                    <p class="text-xs text-slate-700">Ignore the last two digits (64) and look at the remaining part: 17. Find which two perfect square numbers 17 sits between:</p>
+                                    <div class="font-mono text-xs bg-white p-2 rounded border border-purple-200 mt-1">
+                                        <p>4^2 = 16</p>
+                                        <p>5^2 = 25</p>
+                                    </div>
+                                    <p class="text-xs text-slate-700 mt-1">Since 17 is between 16 and 25, we always pick the smaller base number, which is 4. This means our tens digit is 4.</p>
+                                    <p class="text-xs font-semibold text-purple-800 mt-1">Now, our answer is either 42 or 48.</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-bold text-purple-700 text-xs uppercase">Step 3: Choose the Correct Number</p>
+                                    <p class="text-xs text-slate-700">Take the tens digit (4), multiply it by the very next counting number (5):</p>
+                                    <p class="font-mono text-xs font-bold text-purple-900 bg-white p-1.5 rounded border border-purple-200 mt-1">4 × 5 = 20</p>
+                                    <p class="text-xs text-slate-700 mt-1">Compare our remaining number (17) with this result (20):</p>
+                                    <p class="text-xs text-slate-700 pl-2 border-l-2 border-purple-400 font-medium">Since 17 is smaller than 20, we pick the smaller option between 42 and 48.</p>
+                                    <p class="text-sm font-bold text-purple-800 mt-2">Therefore, the square root of 1764 is 42!</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm">
+                                <p class="font-bold text-slate-700">⚠️ Constraints & Weaknesses:</p>
+                                <ul class="list-disc pl-4 text-slate-600 space-y-1">
+                                    <li>**ONLY** works on absolute perfect squares! If you try this trick on 250, it gives a completely wrong answer.</li>
+                                    <li>Maxes out safely at 4-digit squares.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Visualizer Widget -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-green-100">
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 text-center">Interactive Walkthrough Examples</h4>
+                    <div class="flex flex-wrap gap-2 justify-center mb-6">
+                        <button onclick="renderSquareWalkthrough(144)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-green-100 border border-slate-200">Example 1: √144</button>
+                        <button onclick="renderSquareWalkthrough(256)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-green-100 border border-slate-200">Example 2: √256</button>
+                        <button onclick="renderSquareWalkthrough(576)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-green-100 border border-slate-200">Example 3: √576</button>
+                        <button onclick="renderSquareWalkthrough(1296)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-green-100 border border-slate-200">Example 4: √1296</button>
+                        <button onclick="renderSquareWalkthrough(4096)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-green-100 border border-slate-200">Example 5: √4096</button>
+                    </div>
+                    <div id="square-walkthrough-display" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 min-h-[200px]">
+                        <p class="text-slate-500 font-medium text-center py-12">Click an example number above to see the step-by-step visual methods!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cube Root Content Container -->
+            <div id="learn-cube-zone" class="space-y-8 hidden">
+                <!-- Kid Intro Card -->
+                <div class="bg-gradient-to-r from-purple-400 to-indigo-500 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-6">
+                    <div class="text-5xl">🧊</div>
+                    <div>
+                        <h3 class="text-2xl heading-font mb-2">What is a Cube Root?</h3>
+                        <p class="text-lg leading-relaxed font-medium">Think 3D! If you build a solid Rubik's Cube style block out of tiny building cubes, the **Cube Root** is the exact measure of its **width, height, and depth**. If your 3D structure uses 64 small cubes total, it's a 4x4x4 cube layout, making the cube root of 64 exactly 4!</p>
+                    </div>
+                </div>
+
+                <!-- Methods Grid -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Method A -->
+                    <div class="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-md flex flex-col justify-between">
+                        <div>
+                            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Method 1</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3">Prime Factorization Using Division</h4>
+                            <p class="text-slate-600 text-sm mb-4">Just like finding square roots, this method breaks down a number into its prime factors. However, because it is a cube root, we group the numbers into triplets (groups of 3) instead of pairs.</p>
+                            
+                            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 space-y-2 text-sm mb-4">
+                                <p class="font-bold text-indigo-900">Step-by-Step Guide for 13824:</p>
+                                <ul class="list-disc pl-4 text-slate-700 space-y-1">
+                                    <li>Divide continuously by the smallest prime numbers (2, 3, …) until you reach 1.</li>
+                                    <li>Group identical prime factors into triplets (sets of 3).</li>
+                                    <li>Take one number from each triplet and multiply them together.</li>
+                                </ul>
+                                <p class="font-bold text-indigo-900 mt-3">Let's Solve It:</p>
+                                <div class="font-mono text-xs bg-white p-3 rounded border border-indigo-200 text-slate-700 space-y-1 max-h-48 overflow-y-auto">
+                                    <p>13824 ÷ 2 = 6912</p>
+                                    <p>6912 ÷ 2 = 3456</p>
+                                    <p>3456 ÷ 2 = 1728</p>
+                                    <p>1728 ÷ 2 = 864</p>
+                                    <p>864 ÷ 2 = 432</p>
+                                    <p>432 ÷ 2 = 216</p>
+                                    <p>216 ÷ 2 = 108</p>
+                                    <p>108 ÷ 2 = 54</p>
+                                    <p>54 ÷ 2 = 27</p>
+                                    <p>27 ÷ 3 = 9</p>
+                                    <p>9 ÷ 3 = 3</p>
+                                    <p>3 ÷ 3 = 1</p>
+                                </div>
+                                <p class="text-xs font-semibold text-slate-700 mt-2">Now, write out all the prime factors:</p>
+                                <p class="font-mono text-xs font-bold text-slate-800">13824 = (2×2×2) × (2×2×2) × (2×2×2) × (3×3×3)</p>
+                                <p class="text-xs font-semibold text-slate-700 mt-1">Next, group them into triplets:</p>
+                                <ul class="list-disc pl-4 text-xs text-slate-700">
+                                    <li>First triplet of twos: (2×2×2) → Take one 2</li>
+                                    <li>Second triplet of twos: (2×2×2) → Take one 2</li>
+                                    <li>Third triplet of twos: (2×2×2) → Take one 2</li>
+                                    <li>Triplet of threes: (3×3×3) → Take one 3</li>
+                                </ul>
+                                <p class="text-xs font-semibold text-slate-700 mt-1">Multiply the single numbers from each set:</p>
+                                <p class="font-bold text-sm text-indigo-700">"Cube root" = 2 × 2 × 2 × 3 = 24</p>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm">
+                                <p class="font-bold text-slate-700">⚠️ Constraints & Weaknesses:</p>
+                                <ul class="list-disc pl-4 text-slate-600 space-y-1">
+                                    <li>Division columns become extremely long and error-prone very quickly.</li>
+                                    <li>Stalls completely if the prime factors are large double-digit primes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method B -->
+                    <div class="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-md flex flex-col justify-between">
+                        <div>
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Method 2</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3">Vedic Maths Mental Calculation Trick 🧙‍♂️</h4>
+                            <p class="text-slate-600 text-sm mb-4">Vedic Maths makes finding cube roots even faster than square roots! This is because every single digit from 0 to 9 produces a unique last digit when cubed.</p>
+                            
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 space-y-3 text-sm mb-4">
+                                <div>
+                                    <p class="font-bold text-purple-800 text-xs uppercase">Handy Reference Table (Units Digits of Cubes):</p>
+                                    <div class="font-mono text-xs bg-white p-2.5 rounded border border-purple-200 grid grid-cols-2 gap-x-2 gap-y-0.5 mt-1">
+                                        <p>1^3 = 1 (ends in 1)</p>
+                                        <p>2^3 = 8 (ends in 8)</p>
+                                        <p>3^3 = 27 (ends in 7)</p>
+                                        <p>4^3 = 64 (ends in 4)</p>
+                                        <p>5^3 = 125 (ends in 5)</p>
+                                        <p>6^3 = 216 (ends in 6)</p>
+                                        <p>7^3 = 343 (ends in 3)</p>
+                                        <p>8^3 = 512 (ends in 2)</p>
+                                        <p>9^3 = 729 (ends in 9)</p>
+                                    </div>
+                                    <p class="text-xs font-bold text-purple-700 mt-1">Cool pattern to remember: 1, 4, 5, 6, 9 stay the same! 2 swaps with 8, and 3 swaps with 7.</p>
+                                </div>
+
+                                <p class="font-bold text-purple-900 text-xs uppercase">Step-by-Step Guide for 13824:</p>
+
+                                <div>
+                                    <p class="font-bold text-purple-700 text-xs uppercase">Step 1: Find the Units Digit</p>
+                                    <p class="text-xs text-slate-700">Look at the last digit of 13824, which is 4.</p>
+                                    <ul class="list-disc pl-4 text-xs text-slate-700">
+                                        <li>Looking at our table, the only single digit whose cube ends in 4 is 4 (4^3=64).</li>
+                                        <li>Therefore, our units digit is 4.</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <p class="font-bold text-purple-700 text-xs uppercase">Step 2: Find the Tens Digit</p>
+                                    <p class="text-xs text-slate-700">Cross out the last three digits (824) and look at the remaining part: 13. Find which two perfect cubes 13 sits between:</p>
+                                    <div class="font-mono text-xs bg-white p-2 rounded border border-purple-200 mt-1">
+                                        <p>2^3 = 8</p>
+                                        <p>3^3 = 27</p>
+                                    </div>
+                                    <p class="text-xs text-slate-700 mt-1">Since 13 lies between 8 and 27, always pick the smaller base number, which is 2.</p>
+                                    <p class="text-xs font-semibold text-purple-800 mt-1">Therefore, our tens digit is 2.</p>
+                                </div>
+
+                                <div class="bg-white p-2.5 rounded border border-purple-200 text-center font-bold text-purple-900 text-sm">
+                                    Combining both digits gives 24!<br>
+                                    <span class="text-base text-purple-700">∛13824 = 24</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-sm">
+                                <p class="font-bold text-slate-700">⚠️ Constraints & Weaknesses:</p>
+                                <ul class="list-disc pl-4 text-slate-600 space-y-1">
+                                    <li>Fails entirely on numbers that aren't exact perfect cubes.</li>
+                                    <li>Requires memorizing the first 9 cubes (1³ to 9³).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-md border-2 border-purple-100">
+                    <h4 class="text-lg font-bold text-slate-800 mb-4 text-center">Interactive Walkthrough Examples</h4>
+                    <div class="flex flex-wrap gap-2 justify-center mb-6">
+                        <button onclick="renderCubeWalkthrough(216)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-purple-100 border border-slate-200">Example 1: ³√216</button>
+                        <button onclick="renderCubeWalkthrough(1728)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-purple-100 border border-slate-200">Example 2: ³√1,728</button>
+                        <button onclick="renderCubeWalkthrough(12167)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-purple-100 border border-slate-200">Example 3: ³√12,167</button>
+                        <button onclick="renderCubeWalkthrough(91125)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-purple-100 border border-slate-200">Example 4: ³√91,125</button>
+                        <button onclick="renderCubeWalkthrough(493039)" class="px-4 py-2 bg-slate-100 font-bold rounded-xl text-sm hover:bg-purple-100 border border-slate-200">Example 5: ³√493,039</button>
+                    </div>
+                    <div id="cube-walkthrough-display" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 min-h-[200px]">
+                        <p class="text-slate-500 font-medium text-center py-12">Click an example number above to see the step-by-step visual methods!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PRACTICE TAB ================= -->
+        <section id="content-practice" class="space-y-6 hidden">
+            <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-xl border-2 border-slate-100">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl heading-font text-slate-800">Practice Arena</h3>
+                    <p class="text-sm text-slate-500 font-semibold mt-1">Work out the answers without any rush! Get hints whenever you are blocked.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Operation</label>
+                        <select id="practice-type" onchange="generatePracticeQuestion()" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-2.5 font-semibold text-sm focus:outline-none focus:border-green-500">
+                            <option value="square">Square Root (√)</option>
+                            <option value="cube">Cube Root (³√)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Difficulty / Digits</label>
+                        <select id="practice-digits" onchange="generatePracticeQuestion()" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-2.5 font-semibold text-sm focus:outline-none focus:border-green-500">
+                            <option value="easy">Easy (2-Digit Answer)</option>
+                            <option value="medium">Medium (3-4 Digit Radicand)</option>
+                            <option value="hard">Hard (5-6 Digit Radicand)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-8 text-center relative overflow-hidden shadow-lg mb-6">
+                    <div class="absolute top-3 right-3 text-slate-500 font-bold tracking-widest text-xs uppercase" id="practice-ending-badge"></div>
+                    <p class="text-sm text-slate-400 font-bold uppercase tracking-wider mb-2">Find the root of:</p>
+                    <div class="text-4xl md:text-5xl heading-font text-green-400 tracking-wide" id="practice-target-display">--</div>
+                </div>
+
+                <div class="flex gap-3 mb-4">
+                    <input type="number" id="practice-input" placeholder="Type answer..." class="flex-grow bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 font-bold text-lg focus:outline-none focus:border-green-500 text-center">
+                    <button onclick="checkPracticeAnswer()" class="bg-green-500 hover:bg-green-600 text-white px-6 font-bold rounded-xl transition-all shadow-md">Check</button>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <button onclick="revealPracticeHint(1)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2 px-3 rounded-lg border border-slate-200"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> Hint 1: Last Digit</button>
+                    <button onclick="revealPracticeHint(2)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2 px-3 rounded-lg border border-slate-200"><i class="fa-solid fa-wand-magic-sparkles text-purple-500 mr-1"></i> Hint 2: Chop Split</button>
+                </div>
+
+                <div id="practice-feedback" class="hidden p-4 rounded-xl font-bold text-center text-sm"></div>
+                <div id="practice-hint-box" class="hidden p-4 bg-amber-50 border border-amber-200 rounded-xl text-slate-700 text-sm leading-relaxed"></div>
+
+                <button onclick="generatePracticeQuestion()" class="w-full mt-4 bg-slate-800 hover:bg-slate-900 text-white py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-sm">Next Number Please! →</button>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ TAB ================= -->
+        <section id="content-quiz" class="space-y-6 hidden">
+            <div id="quiz-setup-zone" class="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-xl border-2 border-slate-100">
+                <div class="text-center mb-6">
+                    <div class="inline-block bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase mb-2"><i class="fa-solid fa-bolt mr-1"></i> Gamified Training</div>
+                    <h3 class="text-2xl heading-font text-slate-800">Quiz Arena Setup</h3>
+                    <p class="text-sm text-slate-500 font-semibold mt-1">Sharpen your mental computing engine. Track your response speeds in real-time!</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Select Operations Mix</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="selectQuizScope('square')" id="scope-square" class="py-2.5 rounded-xl border-2 border-green-500 bg-green-50 text-green-700 font-bold text-sm transition-all">Squares Only</button>
+                            <button onclick="selectQuizScope('cube')" id="scope-cube" class="py-2.5 rounded-xl border-2 border-slate-200 font-bold text-sm text-slate-600 transition-all">Cubes Only</button>
+                            <button onclick="selectQuizScope('mixed')" id="scope-mixed" class="py-2.5 rounded-xl border-2 border-slate-200 font-bold text-sm text-slate-600 transition-all">Mixed Mode</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Game Rule Format</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="selectQuizFormat('fixed')" id="format-fixed" class="p-4 rounded-xl border-2 border-green-500 bg-green-50 text-left transition-all">
+                                <p class="font-bold text-sm text-green-800"><i class="fa-solid fa-list-ol mr-1"></i> Fixed Challenge</p>
+                                <p class="text-xs text-green-600 mt-1">10 random questions. Measure exact time taken per question.</p>
+                            </button>
+                            <button onclick="selectQuizFormat('time')" id="format-time" class="p-4 rounded-xl border-2 border-slate-200 text-left transition-all">
+                                <p class="font-bold text-sm text-slate-800"><i class="fa-solid fa-hourglass-half mr-1"></i> Time Attack</p>
+                                <p class="text-xs text-slate-500 mt-1">60 seconds total. Smash as many numbers as you can before the buzzer!</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button onclick="startQuizEngine()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-2xl tracking-wide shadow-md transition-all transform hover:scale-[1.02] text-center mt-2">Enter Arena ⚔️</button>
+                </div>
+            </div>
+
+            <div id="quiz-gameplay-zone" class="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-xl border-2 border-slate-100 hidden">
+                <div class="flex items-center justify-between border-b pb-4 mb-4 text-sm font-bold text-slate-600">
+                    <div id="quiz-progress-lbl">Question 1/10</div>
+                    <div class="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200" id="quiz-timer-container">
+                        <i class="fa-solid fa-clock animate-pulse"></i> <span id="quiz-timer-display">0.0s</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 text-white rounded-2xl p-8 text-center shadow-inner relative overflow-hidden mb-6">
+                    <div class="text-5xl heading-font text-green-400 tracking-wider transition-all" id="quiz-question-display">--</div>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="number" id="quiz-input" placeholder="Type answer & hit Enter..." class="flex-grow bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 font-bold text-xl focus:outline-none focus:border-green-500 text-center" autocomplete="off">
+                    <button onclick="submitQuizAnswer()" class="bg-green-500 hover:bg-green-600 text-white px-6 font-bold rounded-xl transition-all shadow-md">Submit</button>
+                </div>
+            </div>
+
+            <div id="quiz-scorecard-zone" class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-xl border-2 border-slate-100 hidden">
+                <div class="text-center mb-6">
+                    <div class="text-5xl mb-2">🎉</div>
+                    <h3 class="text-2xl heading-font text-slate-800">Arena Results</h3>
+                    <p class="text-sm text-slate-500 font-semibold" id="scorecard-subtitle">Performance Evaluation Metrics</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Score</p>
+                        <p class="text-xl md:text-2xl font-black text-slate-700 mt-1" id="scorecard-raw">0/0</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Accuracy</p>
+                        <p class="text-xl md:text-2xl font-black text-green-600 mt-1" id="scorecard-accuracy">0%</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl text-center border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Avg Speed</p>
+                        <p class="text-xl md:text-2xl font-black text-blue-600 mt-1" id="scorecard-speed">0.0s</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Question Breakdown</h4>
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left border-collapse text-xs md:text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
+                                    <th class="p-3">Problem</th>
+                                    <th class="p-3">Your Answer</th>
+                                    <th class="p-3">Correct</th>
+                                    <th class="p-3 text-right">Time Spent</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scorecard-table-rows" class="font-medium text-slate-700">
+                                <!-- Generated Dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 p-4 border border-green-200 rounded-xl mb-6">
+                    <h4 class="text-sm font-bold text-green-800 mb-2"><i class="fa-solid fa-chart-line mr-1"></i> Historical Improvement Log</h4>
+                    <div id="quiz-history-log" class="text-xs text-green-700 space-y-1 font-medium">
+                        No previous score records found yet. Keep running the arena to track your growing processing speeds!
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="exitQuizToSetup()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-xl text-sm transition-all shadow-sm">Play Again 🔄</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs font-semibold text-slate-400 mt-12">
+        Made with ❤️ for Class 7 Math Masters
+    </footer>
+
+    <script>
+        // Database Matrix Arrays containing perfect values with distinct properties
+        const DATA = {
+            square: [
+                { radicand: 144, root: 12, ending: 4 },
+                { radicand: 169, root: 13, ending: 9 },
+                { radicand: 225, root: 15, ending: 5 },
+                { radicand: 256, root: 16, ending: 6 },
+                { radicand: 361, root: 19, ending: 1 },
+                { radicand: 576, root: 24, ending: 6 },
+                { radicand: 784, root: 28, ending: 4 },
+                { radicand: 1024, root: 32, ending: 4 },
+                { radicand: 1296, root: 36, ending: 6 },
+                { radicand: 1764, root: 42, ending: 4 },
+                { radicand: 2025, root: 45, ending: 5 },
+                { radicand: 3136, root: 56, ending: 6 },
+                { radicand: 4096, root: 64, ending: 6 },
+                { radicand: 5184, root: 72, ending: 4 },
+                { radicand: 7056, root: 84, ending: 6 },
+                { radicand: 9801, root: 99, ending: 1 }
+            ],
+            cube: [
+                { radicand: 64, root: 4, ending: 4 },
+                { radicand: 125, root: 5, ending: 5 },
+                { radicand: 216, root: 6, ending: 6 },
+                { radicand: 343, root: 7, ending: 3 },
+                { radicand: 512, root: 8, ending: 2 },
+                { radicand: 729, root: 9, ending: 9 },
+                { radicand: 1331, root: 11, ending: 1 },
+                { radicand: 1728, root: 12, ending: 8 },
+                { radicand: 4913, root: 17, ending: 3 },
+                { radicand: 8000, root: 20, ending: 0 },
+                { radicand: 12167, root: 23, ending: 7 },
+                { radicand: 13824, root: 24, ending: 4 },
+                { radicand: 29791, root: 31, ending: 1 },
+                { radicand: 50653, root: 37, ending: 3 },
+                { radicand: 91125, root: 45, ending: 5 },
+                { radicand: 148877, root: 53, ending: 7 },
+                { radicand: 250047, root: 63, ending: 7 },
+                { radicand: 493039, root: 79, ending: 9 },
+                { radicand: 912673, root: 97, ending: 3 }
+            ]
+        };
+
+        // Navigation Controller
+        function switchTab(tabId) {
+            document.querySelectorAll('main > section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('nav > button').forEach(btn => btn.classList.remove('tab-active', 'text-slate-600'));
+            
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('tab-active');
+            
+            if (tabId === 'practice') generatePracticeQuestion();
+        }
+
+        // ================= LEARN CONTROLS =================
+        function toggleLearnConcept(type) {
+            if(type === 'square') {
+                document.getElementById('learn-square-zone').classList.remove('hidden');
+                document.getElementById('learn-cube-zone').classList.add('hidden');
+                document.getElementById('btn-learn-square').className = "px-6 py-3 rounded-2xl font-bold bg-green-500 text-white shadow-md transform hover:scale-105 transition-all";
+                document.getElementById('btn-learn-cube').className = "px-6 py-3 rounded-2xl font-bold bg-white text-green-600 border-2 border-green-200 hover:bg-green-50 shadow-sm transform hover:scale-105 transition-all";
+            } else {
+                document.getElementById('learn-square-zone').classList.add('hidden');
+                document.getElementById('learn-cube-zone').classList.remove('hidden');
+                document.getElementById('btn-learn-square').className = "px-6 py-3 rounded-2xl font-bold bg-white text-green-600 border-2 border-green-200 hover:bg-green-50 shadow-sm transform hover:scale-105 transition-all";
+                document.getElementById('btn-learn-cube').className = "px-6 py-3 rounded-2xl font-bold bg-purple-600 text-white shadow-md transform hover:scale-105 transition-all";
+            }
+        }
+
+        // Square Walkthrough Visualizer Generator Engine
+        function renderSquareWalkthrough(num) {
+            const display = document.getElementById('square-walkthrough-display');
+            let content = '';
+
+            const factorData = {
+                144: { primes: '2 × 2 × 2 × 2 × 3 × 3', pairs: '(2×2) × (2×2) × (3×3)', pull: '2 × 2 × 3', root: 12, splitL: '1', splitR: '44', leftFit: '1² = 1', opts: '12 or 18', check: '1 × 2 = 2' },
+                256: { primes: '2 × 2 × 2 × 2 × 2 × 2 × 2 × 2', pairs: '(2×2) × (2×2) × (2×2) × (2×2)', pull: '2 × 2 × 2 × 2', root: 16, splitL: '2', splitR: '56', leftFit: '1² = 1', opts: '14 or 16', check: '1 × 2 = 2' },
+                576: { primes: '2 × 2 × 2 × 2 × 2 × 2 × 3 × 3', pairs: '(2×2) × (2×2) × (2×2) × (3×3)', pull: '2 × 2 × 2 × 3', root: 24, splitL: '5', splitR: '76', leftFit: '2² = 4', opts: '24 or 26', check: '2 × 3 = 6' },
+                1296: { primes: '2 × 2 × 2 × 2 × 3 × 3 × 3 × 3', pairs: '(2×2) × (2×2) × (3×3) × (3×3)', pull: '2 × 2 × 3 × 3', root: 36, splitL: '12', splitR: '96', leftFit: '3² = 9', opts: '34 or 36', check: '3 × 4 = 12' },
+                4096: { primes: '2×2×2×2×2×2×2×2×2×2×2×2', pairs: 'Six pairs of (2×2)', pull: '2 × 2 × 2 × 2 × 2 × 2', root: 64, splitL: '40', splitR: '96', leftFit: '6² = 36', opts: '64 or 66', check: '6 × 7 = 42' }
+            }[num];
+
+            content = `
+                <div class="space-y-6">
+                    <h3 class="text-center font-bold text-xl text-green-700 border-b pb-2">Target Radicand: √${num}</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-blue-600 text-sm mb-3 uppercase tracking-wider"><i class="fa-solid fa-list-ol mr-1"></i> Prime Factor Breakdown</h4>
+                            <p class="text-xs text-slate-500 mb-2">Continuous prime splits:</p>
+                            <div class="font-mono text-xs bg-slate-50 p-2 rounded mb-3 text-slate-600 tracking-wider">${factorData.primes}</div>
+                            <p class="text-xs text-slate-500 mb-2">Grouped pairs:</p>
+                            <div class="font-mono text-xs bg-slate-50 p-2 rounded mb-3 text-slate-700 font-bold">${factorData.pairs}</div>
+                            <p class="text-sm font-semibold">Extract one out of each pair:</p>
+                            <div class="text-base font-bold text-slate-800 my-2 text-center">${factorData.pull} = <span class="text-green-600 text-xl">${factorData.root}</span></div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-purple-600 text-sm mb-3 uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> Quick Ninja Mental Hack</h4>
+                            <div class="space-y-3 text-xs md:text-sm">
+                                <p><strong>Step 1: Chop Split:</strong> Separate the last two digits: <span class="bg-purple-100 px-2 py-0.5 rounded font-bold text-purple-700">${factorData.splitL} | ${factorData.splitR}</span></p>
+                                <p><strong>Step 2: Left Side Boundary:</strong> Biggest square inside <b>${factorData.splitL}</b> is <b>${factorData.leftFit}</b>. First digit = <span class="text-purple-600 font-bold">${Math.floor(factorData.root / 10)}</span>.</p>
+                                <p><strong>Step 3: Ending Match:</strong> Ends in <b>${factorData.splitR.slice(-1)}</b>, leaving us choices: <span class="font-semibold text-slate-700">${factorData.opts}</span>.</p>
+                                <div class="bg-purple-50 p-2 rounded border border-purple-100 text-xs">
+                                    <strong>🥋 The Deciding Tie-Breaker:</strong> Multiply first digit by next step up: ${factorData.check}. Compare left side (${factorData.splitL}) to this product. Pick the matching variant: <span class="font-bold text-green-600 text-sm">${factorData.root}</span>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            display.innerHTML = content;
+        }
+
+        // Cube Walkthrough Visualizer Generator Engine
+        function renderCubeWalkthrough(num) {
+            const display = document.getElementById('cube-walkthrough-display');
+            let content = '';
+
+            const factorData = {
+                216: { primes: '2 × 2 × 2 × 3 × 3 × 3', trips: '(2×2×2) × (3×3×3)', pull: '2 × 3', root: 6, splitL: '0', splitR: '216', baseCube: '0³ = 0', end: '6' },
+                1728: { primes: '2×2×2 × 2×2×2 × 3×3×3', trips: '(2×2×2) × (2×2×2) × (3×3×3)', pull: '2 × 2 × 3', root: 12, splitL: '1', splitR: '728', baseCube: '1³ = 1', end: '8 matches uniquely to 2' },
+                12167: { primes: '23 × 23 × 23', trips: '(23 × 23 × 23)', pull: '23', root: 23, splitL: '12', splitR: '167', baseCube: '2³ = 8', end: '7 matches uniquely to 3' },
+                91125: { primes: '3×3×3 × 3×3×3 × 5×5×5', trips: '(3×3×3) × (3×3×3) × (5×5×5)', pull: '3 × 3 × 5', root: 45, splitL: '91', splitR: '125', baseCube: '4³ = 64', end: '5 matches uniquely to 5' },
+                493039: { primes: '79 × 79 × 79', trips: '(79 × 79 × 79)', pull: '79', root: 79, splitL: '493', splitR: '039', baseCube: '7³ = 343', end: '9 matches uniquely to 9' }
+            }[num];
+
+            content = `
+                <div class="space-y-6">
+                    <h3 class="text-center font-bold text-xl text-purple-700 border-b pb-2">Target Radicand: ³√${num.toLocaleString()}</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-blue-600 text-sm mb-3 uppercase tracking-wider"><i class="fa-solid fa-list-ol mr-1"></i> Prime Triplet Breakdown</h4>
+                            <p class="text-xs text-slate-500 mb-2">Prime factors list:</p>
+                            <div class="font-mono text-xs bg-slate-50 p-2 rounded mb-3 text-slate-600 tracking-wider">${factorData.primes}</div>
+                            <p class="text-xs text-slate-500 mb-2">Grouped triplets (Sets of 3):</p>
+                            <div class="font-mono text-xs bg-slate-50 p-2 rounded mb-3 text-slate-700 font-bold">${factorData.trips}</div>
+                            <p class="text-sm font-semibold">Extract one from each triplet set:</p>
+                            <div class="text-base font-bold text-slate-800 my-2 text-center">${factorData.pull} = <span class="text-purple-600 text-xl">${factorData.root}</span></div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-purple-600 text-sm mb-3 uppercase tracking-wider"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Instant Mental Hack (No Tie-Breakers!)</h4>
+                            <div class="space-y-3 text-xs md:text-sm">
+                                <p><strong>Step 1: Chop Last THREE Digits:</strong> Separate the digits: <span class="bg-purple-100 px-2 py-0.5 rounded font-bold text-purple-700">${factorData.splitL} | ${factorData.splitR}</span></p>
+                                <p><strong>Step 2: Left Remaining Range:</strong> Biggest solid cube inside <b>${factorData.splitL}</b> is <b>${factorData.baseCube}</b>. First digit = <span class="text-purple-600 font-bold">${Math.floor(factorData.root / 10) || factorData.root}</span>.</p>
+                                <p><strong>Step 3: Ending Code Look:</strong> The number ends completely in <b>${factorData.splitR.slice(-1)}</b>. Inside cube codes, <b>${factorData.end}</b>.</p>
+                                <div class="bg-green-50 text-green-800 p-2.5 rounded border border-green-200 text-center font-bold text-sm">
+                                    Combine steps instantly → Result: ${factorData.root}!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            display.innerHTML = content;
+        }
+
+        // ================= PRACTICE ENGINE CONTROLS =================
+        let activePracticeItem = null;
+
+        function generatePracticeQuestion() {
+            const typeSelect = document.getElementById('practice-type');
+            const diffSelect = document.getElementById('practice-digits');
+            if(!typeSelect || !diffSelect) return;
+
+            const type = typeSelect.value;
+            const diff = diffSelect.value;
+            
+            let dataset = DATA[type];
+            let filtered = [];
+
+            // Filter logic based on complexity ranges
+            if(diff === 'easy') {
+                filtered = dataset.filter(item => item.root < 20);
+            } else if(diff === 'medium') {
+                filtered = dataset.filter(item => item.radicand >= 144 && item.radicand < 10000);
+            } else {
+                filtered = dataset.filter(item => item.radicand >= 10000);
+            }
+
+            if(filtered.length === 0) filtered = dataset;
+
+            activePracticeItem = filtered[Math.floor(Math.random() * filtered.length)];
+            
+            document.getElementById('practice-target-display').innerText = (type === 'cube' ? '³√' : '√') + activePracticeItem.radicand.toLocaleString();
+            document.getElementById('practice-ending-badge').innerText = `Ends with ${activePracticeItem.ending}`;
+            
+            // Reset feedback boards
+            document.getElementById('practice-input').value = '';
+            document.getElementById('practice-feedback').className = "hidden p-4 rounded-xl font-bold text-center text-sm";
+            document.getElementById('practice-hint-box').className = "hidden p-4 bg-amber-50 border border-amber-200 rounded-xl text-slate-700 text-sm leading-relaxed";
+        }
+
+        function checkPracticeAnswer() {
+            const inputVal = parseInt(document.getElementById('practice-input').value);
+            const feedback = document.getElementById('practice-feedback');
+            
+            feedback.classList.remove('hidden');
+            if(inputVal === activePracticeItem.root) {
+                feedback.className = "p-4 bg-green-100 text-green-700 rounded-xl font-bold text-center text-sm factor-bubble";
+                feedback.innerHTML = `🎉 Amazing work Ninja! Correct answer is ${activePracticeItem.root}.`;
+            } else {
+                feedback.className = "p-4 bg-red-100 text-red-700 rounded-xl font-bold text-center text-sm";
+                feedback.innerHTML = `❌ Ouch! Give it another try or use a hint below!`;
+            }
+        }
+
+        function revealPracticeHint(level) {
+            const hintBox = document.getElementById('practice-hint-box');
+            const type = document.getElementById('practice-type').value;
+            hintBox.classList.remove('hidden');
+
+            if(level === 1) {
+                if(type === 'square') {
+                    hintBox.innerHTML = `💡 <strong>Last Digit Clue:</strong> This number ends in <b>${activePracticeItem.ending}</b>. Perfect squares ending in ${activePracticeItem.ending} must have a root ending in either <b>${activePracticeItem.root % 10}</b> or its partner!`;
+                } else {
+                    let mapping = activePracticeItem.radicand % 10;
+                    hintBox.innerHTML = `💡 <strong>Last Digit Clue:</strong> This cube ends in <b>${mapping}</b>. For cubes, this maps uniquely to a root ending in <b>${activePracticeItem.root % 10}</b>!`;
+                }
+            } else {
+                let textVal = activePracticeItem.radicand.toString();
+                if(type === 'square') {
+                    let cut = textVal.slice(0, -2) || '0';
+                    hintBox.innerHTML = `🥋 <strong>Ninja Chop:</strong> Chop off the last two digits to get <b>${cut}</b>. What is the largest number whose square fits inside ${cut}? That gives you your first digit!`;
+                } else {
+                    let cut = textVal.slice(0, -3) || '0';
+                    hintBox.innerHTML = `🥋 <strong>Ninja Chop:</strong> Chop off the last three digits to get <b>${cut}</b>. What is the largest cube that fits inside ${cut}? That gives you your first digit!`;
+                }
+            }
+        }
+
+        // ================= QUIZ CONTROLLER MATRIX =================
+        let quizScope = 'square';
+        let quizFormat = 'fixed';
+        let quizQuestions = [];
+        let activeQuizIdx = 0;
+        let quizAnswersLog = [];
+        
+        let questionStartTime = 0;
+        let quizTimerInterval = null;
+        let globalTimeAttackElapsed = 60;
+
+        function selectQuizScope(val) {
+            quizScope = val;
+            document.querySelectorAll('[id^="scope-"]').forEach(btn => btn.className = "py-2.5 rounded-xl border-2 border-slate-200 font-bold text-sm text-slate-600 transition-all");
+            document.getElementById(`scope-${val}`).className = "py-2.5 rounded-xl border-2 border-green-500 bg-green-50 text-green-700 font-bold text-sm transition-all";
+        }
+
+        function selectQuizFormat(val) {
+            quizFormat = val;
+            document.querySelectorAll('[id^="format-"]').forEach(btn => btn.className = "p-4 rounded-xl border-2 border-slate-200 text-left transition-all");
+            document.getElementById(`format-${val}`).className = "p-4 rounded-xl border-2 border-green-500 bg-green-50 text-left transition-all";
+        }
+
+        function startQuizEngine() {
+            let pool = [];
+            if(quizScope === 'square' || quizScope === 'mixed') pool = pool.concat(DATA.square.map(x => ({...x, mode: 'square'})));
+            if(quizScope === 'cube' || quizScope === 'mixed') pool = pool.concat(DATA.cube.map(x => ({...x, mode: 'cube'})));
+
+            pool.sort(() => Math.random() - 0.5);
+            
+            quizQuestions = quizFormat === 'fixed' ? pool.slice(0, 10) : pool.slice(0, 30);
+            activeQuizIdx = 0;
+            quizAnswersLog = [];
+            globalTimeAttackElapsed = 60;
+
+            document.getElementById('quiz-setup-zone').classList.add('hidden');
+            document.getElementById('quiz-gameplay-zone').classList.remove('hidden');
+            document.getElementById('quiz-scorecard-zone').classList.add('hidden');
+
+            document.getElementById('quiz-input').value = '';
+            document.getElementById('quiz-input').focus();
+
+            nextQuizQuestion();
+        }
+
+        function nextQuizQuestion() {
+            if(quizFormat === 'fixed' && activeQuizIdx >= quizQuestions.length) {
+                endQuizEngine();
+                return;
+            }
+
+            const q = quizQuestions[activeQuizIdx];
+            document.getElementById('quiz-question-display').innerText = (q.mode === 'cube' ? '³√' : '√') + q.radicand.toLocaleString();
+            
+            if(quizFormat === 'fixed') {
+                document.getElementById('quiz-progress-lbl').innerText = `Question ${activeQuizIdx + 1} / ${quizQuestions.length}`;
+                questionStartTime = performance.now();
+                resetQuestionTimer();
+            } else {
+                document.getElementById('quiz-progress-lbl').innerText = `Score: ${quizAnswersLog.filter(x => x.correct).length} solved`;
+                if(quizTimerInterval === null) startTimeAttackGlobalTimer();
+            }
+            questionStartTime = performance.now();
+        }
+
+        function resetQuestionTimer() {
+            clearInterval(quizTimerInterval);
+            document.getElementById('quiz-timer-container').className = "flex items-center gap-1.5 text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 text-xs font-bold";
+            quizTimerInterval = setInterval(() => {
+                let seconds = ((performance.now() - questionStartTime) / 1000).toFixed(1);
+                document.getElementById('quiz-timer-display').innerText = `${seconds}s`;
+            }, 100);
+        }
+
+        function startTimeAttackGlobalTimer() {
+            document.getElementById('quiz-timer-container').className = "flex items-center gap-1.5 text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200 text-xs font-bold animate-bounce";
+            quizTimerInterval = setInterval(() => {
+                globalTimeAttackElapsed--;
+                document.getElementById('quiz-timer-display').innerText = `${globalTimeAttackElapsed}s remaining`;
+                if(globalTimeAttackElapsed <= 0) {
+                    clearInterval(quizTimerInterval);
+                    quizTimerInterval = null;
+                    endQuizEngine();
+                }
+            }, 1000);
+        }
+
+        function submitQuizAnswer() {
+            const inputField = document.getElementById('quiz-input');
+            const userAns = parseInt(inputField.value);
+            if(isNaN(userAns)) return;
+
+            const q = quizQuestions[activeQuizIdx];
+            let elapsed = ((performance.now() - questionStartTime) / 1000).toFixed(2);
+
+            quizAnswersLog.push({
+                problem: (q.mode === 'cube' ? '³√' : '√') + q.radicand,
+                userAnswer: userAns,
+                correctAnswer: q.root,
+                correct: userAns === q.root,
+                timeTaken: parseFloat(elapsed)
+            });
+
+            activeQuizIdx++;
+            inputField.value = '';
+            inputField.focus();
+            
+            nextQuizQuestion();
+        }
+
+        document.getElementById('quiz-input')?.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter') submitQuizAnswer();
+        });
+
+        function endQuizEngine() {
+            clearInterval(quizTimerInterval);
+            quizTimerInterval = null;
+
+            document.getElementById('quiz-gameplay-zone').classList.add('hidden');
+            document.getElementById('quiz-scorecard-zone').classList.remove('hidden');
+
+            const total = quizAnswersLog.length;
+            const correctCount = quizAnswersLog.filter(x => x.correct).length;
+            const accuracy = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+            const avgSpeed = total > 0 ? (quizAnswersLog.reduce((acc, curr) => acc + curr.timeTaken, 0) / total).toFixed(2) : 0.0;
+
+            document.getElementById('scorecard-raw').innerText = `${correctCount} / ${total}`;
+            document.getElementById('scorecard-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('scorecard-speed').innerText = `${avgSpeed}s`;
+            
+            document.getElementById('scorecard-subtitle').innerText = quizFormat === 'fixed' ? 'Fixed Challenge Run Analysis' : 'Time Attack Evaluation Arena';
+
+            const tbody = document.getElementById('scorecard-table-rows');
+            tbody.innerHTML = quizAnswersLog.map(log => `
+                <tr class="border-b border-slate-100 hover:bg-slate-50">
+                    <td class="p-3 font-bold text-slate-800">${log.problem}</td>
+                    <td class="p-3 font-mono ${log.correct ? 'text-green-600' : 'text-red-500 font-bold'}">${log.userAnswer}</td>
+                    <td class="p-3 font-mono text-slate-600">${log.correctAnswer}</td>
+                    <td class="p-3 text-right font-semibold text-blue-600">${log.timeTaken}s</td>
+                </tr>
+            `).join('');
+
+            saveToHistoricalLocalStorage(accuracy, avgSpeed);
+        }
+
+        function saveToHistoricalLocalStorage(accuracy, speed) {
+            let history = JSON.parse(localStorage.getItem('math_ninja_history') || '[]');
+            let timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            history.unshift({ time: timestamp, acc: accuracy, spd: speed, fmt: quizFormat });
+            if(history.length > 5) history.pop();
+            localStorage.setItem('math_ninja_history', JSON.stringify(history));
+
+            const logBox = document.getElementById('quiz-history-log');
+            logBox.innerHTML = history.map((h, i) => `
+                <div class="flex justify-between border-b border-green-100 py-1">
+                    <span>⚡ Run #${history.length - i} (${h.fmt === 'fixed' ? 'Fixed' : 'Attack'}):</span>
+                    <span class="font-bold">Accuracy: <span class="text-green-600">${h.acc}%</span> | Avg Speed: <span class="text-blue-600">${h.spd}s</span></span>
+                </div>
+            `).join('');
+        }
+
+        function exitQuizToSetup() {
+            document.getElementById('quiz-setup-zone').classList.remove('hidden');
+            document.getElementById('quiz-scorecard-zone').classList.add('hidden');
+        }
+        
+        // Initializer
+        window.addEventListener('DOMContentLoaded', () => {
+            generatePracticeQuestion();
+        });
+    </script>
+</body>
+</html>
